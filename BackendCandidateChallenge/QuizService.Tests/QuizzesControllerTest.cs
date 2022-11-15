@@ -73,7 +73,7 @@ public class QuizzesControllerTest
         {
             var client = testHost.CreateClient();
             const long quizId = 999;
-            var question = new QuestionCreateModel("The answer to everything is what?");
+            var question = new QuestionCreateModel("The answer to everything is what?", quizId);
             var content = new StringContent(JsonConvert.SerializeObject(question));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var response = await client.PostAsync(new Uri(testHost.BaseAddress, $"{QuizApiEndPoint}"),content);
