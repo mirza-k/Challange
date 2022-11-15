@@ -2,9 +2,9 @@
 using System.Data;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
-using QuizService.Model;
-using QuizService.Model.Domain;
 using System.Linq;
+using QuizModel.Domain;
+using QuizModel.Model;
 
 namespace QuizService.Controllers;
 

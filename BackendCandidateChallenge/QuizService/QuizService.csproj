@@ -14,4 +14,12 @@
     <EmbeddedResource Include="Migrations\*.sql" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuizModel\QuizModel.csproj" />
+  </ItemGroup>
+
 </Project>
