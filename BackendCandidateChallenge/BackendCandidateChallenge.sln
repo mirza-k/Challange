@@ -11,9 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizClient", "QuizClient\Qu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizClient.Tests", "QuizClient.Tests\QuizClient.Tests.csproj", "{A1746465-9494-46CC-AB14-EB6AB15F446D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizRepository", "QuizRepository\QuizRepository.csproj", "{0EA7CB26-FA5E-41BB-9B6D-6822F6DD900A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizModel", "QuizModel\QuizModel.csproj", "{1430D065-F283-4E2F-AE1B-D7B5323CA6A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizModel", "QuizModel\QuizModel.csproj", "{1430D065-F283-4E2F-AE1B-D7B5323CA6A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		{A1746465-9494-46CC-AB14-EB6AB15F446D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1746465-9494-46CC-AB14-EB6AB15F446D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1746465-9494-46CC-AB14-EB6AB15F446D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0EA7CB26-FA5E-41BB-9B6D-6822F6DD900A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0EA7CB26-FA5E-41BB-9B6D-6822F6DD900A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0EA7CB26-FA5E-41BB-9B6D-6822F6DD900A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0EA7CB26-FA5E-41BB-9B6D-6822F6DD900A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1430D065-F283-4E2F-AE1B-D7B5323CA6A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1430D065-F283-4E2F-AE1B-D7B5323CA6A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1430D065-F283-4E2F-AE1B-D7B5323CA6A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
