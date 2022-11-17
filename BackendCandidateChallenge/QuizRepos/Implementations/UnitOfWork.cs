@@ -11,11 +11,13 @@ namespace QuizRepos.Implementations
     {
         private readonly ChallangeDbContext _context;
         public IQuizRepository Quizzes { get; set; }
+        public IQuestionRepository Questions { get; set; }
 
         public UnitOfWork(ChallangeDbContext context)
         {
             _context = context;
             Quizzes = new QuizRepository(_context);
+            Questions = new QuestionRepository(_context);
         }
 
 

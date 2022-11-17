@@ -9,6 +9,7 @@ namespace QuizRepos.Interfaces
     public interface IUnitOfWork
     {
         public IQuizRepository Quizzes{ get; set; }
+        public IQuestionRepository Questions { get; set; }
         int Complete();
     }
 }
