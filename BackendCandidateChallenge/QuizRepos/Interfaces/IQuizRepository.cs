@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuizModel.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuizRepos.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IQuizRepository : IRepository<Quiz>
     {
-        public IQuizRepository Quizzes{ get; set; }
-        int Complete();
     }
 }

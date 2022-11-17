@@ -10,11 +10,14 @@ namespace QuizRepos.Implementations
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ChallangeDbContext _context;
+        public IQuizRepository Quizzes { get; set; }
 
         public UnitOfWork(ChallangeDbContext context)
         {
             _context = context;
+            Quizzes = new QuizRepository(_context);
         }
+
 
         public int Complete()
         {
