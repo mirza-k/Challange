@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuizModel.Domain;
 
-namespace QuizService
+namespace QuizRepos
 {
     public class ChallangeDbContext : DbContext
     {
