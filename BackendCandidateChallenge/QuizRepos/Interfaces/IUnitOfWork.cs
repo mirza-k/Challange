@@ -10,6 +10,7 @@ namespace QuizRepos.Interfaces
     {
         public IQuizRepository Quizzes{ get; set; }
         public IQuestionRepository Questions { get; set; }
+        public IAnswerRepository Answers { get; set; }
         int Complete();
     }
 }
