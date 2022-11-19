@@ -9,6 +9,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QuizRepos;
+using QuizRepos.Implementations;
+using QuizRepos.Interfaces;
+using QuizServices.Interfaces;
+using System;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace QuizService;
 
@@ -24,10 +33,16 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.AddDbContext<ChallangeDbContext>(option => option.UseInMemoryDatabase("Data Source=:memory:"));
         services.AddMvc();
         services.AddSingleton(InitializeDb());
         services.AddControllers();
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IQuizService, QuizServices.Implementations.QuizService>();
+        services.AddScoped<IQuestionService, QuizServices.Implementations.QuestionService>();
+        services.AddScoped<IAnswerService, QuizServices.Implementations.AnswerService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
