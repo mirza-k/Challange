@@ -1,8 +1,4 @@
-﻿using System.Data;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -104,15 +100,15 @@ public class Startup
 
         var quiz1 = new QuizModel.Domain.Quiz() { Id = 1, Title = "My first quiz" };
         var quiz2 = new QuizModel.Domain.Quiz() { Id = 2, Title = "My second quiz" };
-        var question1 = new QuizModel.Domain.Question() { Id = 1, Text = "My first question" };
-        var answer1 = new QuizModel.Domain.Answer() { Id = 1, Text = "My first answer to first q" };
-        var answer2 = new QuizModel.Domain.Answer() { Id = 2, Text = "My second answer to first q" };
+        var question1 = new QuizModel.Domain.Question() { Id = 1, Text = "My first question", QuizId = 1 };
+        var answer1 = new QuizModel.Domain.Answer() { Id = 1, Text = "My first answer to first q", QuestionId = 1 };
+        var answer2 = new QuizModel.Domain.Answer() { Id = 2, Text = "My second answer to first q", QuestionId = 1 };
         question1.CorrectAnswerId = 1;
 
-        var question2 = new QuizModel.Domain.Question() { Id = 2, Text = "My second question" };
-        var answer3 = new QuizModel.Domain.Answer() { Id = 3, Text = "My first answer to second q" };
-        var answer4 = new QuizModel.Domain.Answer() { Id = 4, Text = "My second answer to second q" };
-        var answer5 = new QuizModel.Domain.Answer() { Id = 5, Text = "My third answer to second q" };
+        var question2 = new QuizModel.Domain.Question() { Id = 2, Text = "My second question", QuizId = 1 };
+        var answer3 = new QuizModel.Domain.Answer() { Id = 3, Text = "My first answer to second q", QuestionId = 2 };
+        var answer4 = new QuizModel.Domain.Answer() { Id = 4, Text = "My second answer to second q", QuestionId = 2 };
+        var answer5 = new QuizModel.Domain.Answer() { Id = 5, Text = "My third answer to second q" , QuestionId = 2 };
         question2.CorrectAnswerId = 5;
 
         context.Quizzes.AddRange(quiz1, quiz2);
