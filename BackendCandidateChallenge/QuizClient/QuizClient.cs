@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using QuizClient.Model;
 using QuizClient.Tests;
 
 namespace QuizClient;
@@ -54,7 +56,7 @@ public class QuizClient
             new Response<Uri>(response.StatusCode, response.Headers.Location) :
             new Response<Uri>(response.StatusCode, null, await ReadErrorAsync(response));
     }
-		
+
     public async Task<Response<Uri>> PostAnswerAsync(int quizId, int questionId, Answer answer, CancellationToken cancellationToken)
     {
         var request =
@@ -121,6 +123,30 @@ public class QuizClient
     private static async Task<T> ReadAndDeserializeAsync<T>(HttpResponseMessage response)
     {
         return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+    }
+
+    public async Task<Response<int>> TakeAQuiz(int quizId, List<Answer> userAnswers)
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get, new Uri(_quizServiceUri, $"/api/quizzes/{quizId}/play"));
+        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        var response = await _httpClient.SendAsync(request, CancellationToken.None);
+        var responseValue = JsonConvert.DeserializeObject<QuizResponse>(await response.Content.ReadAsStringAsync());
+
+        int correctAnswers = 0;
+
+        foreach(var answer in userAnswers)
+        {
+            var answerMatch = responseValue.Answers.FirstOrDefault(x => x.Text == answer.Text && x.QuestionId == answer.QuestionId);
+            if(answerMatch.Id != 0)
+            {
+                var correctQuestionMatch = responseValue.Questions.FirstOrDefault(x => x.Id == answerMatch.QuestionId && x.CorrectAnswerId == answerMatch.Id);
+                if (correctQuestionMatch != null)
+                    correctAnswers++;
+            }
+        }
+
+        return new Response<int>(response.StatusCode, correctAnswers);
     }
 }
 

@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
+using QuizClient.Model;
 using Xunit;
 
 namespace QuizClient.Tests;
@@ -214,7 +215,7 @@ public class QuizClientTests : IClassFixture<QuizServiceApiPact>
 
         _mockProviderService.VerifyInteractions();
     }
-		
+
     [Fact]
     public async Task PostAnswers_Returns201CreatedAndLocationHeader()
     {
@@ -281,11 +282,67 @@ public class QuizClientTests : IClassFixture<QuizServiceApiPact>
 
         var consumer = new QuizClient(_mockProviderServiceBaseUri, Client);
 
-        var result = await consumer.PostQuizResponseAsync(new QuestionResponse(),123);
+        var result = await consumer.PostQuizResponseAsync(new QuestionResponse(), 123);
         Assert.True(string.IsNullOrEmpty(result.ErrorMessage), result.ErrorMessage);
         Assert.Equal(HttpStatusCode.Created, result.StatusCode);
         Assert.NotNull(result.Value);
 
         _mockProviderService.VerifyInteractions();
+    }
+
+    [Fact]
+    public async Task TakeAQuiz()
+    {
+        _mockProviderService
+            .Given("Return quiz to play")
+            .UponReceiving("A GET request to retrieve the quiz to play")
+            .With(new ProviderServiceRequest
+            {
+                Method = HttpVerb.Get,
+                Path = "/api/quizzes/123/play",
+                Headers = new Dictionary<string, object>
+                {
+                    { "Accept", "application/json" }
+                }
+            })
+            .WillRespondWith(new ProviderServiceResponse
+            {
+                Status = 200,
+                Headers = new Dictionary<string, object>
+                {
+                    { "Content-Type", "application/json; charset=utf-8" }
+                },
+                Body = new QuizResponse()
+                {
+                    Title = "Quiz",
+                    Id = 123,
+                    Questions = new List<Question>() {
+                        new Question() { Id = 1, Text = "Capital city of England?", CorrectAnswerId = 2, QuizId = 123 },
+                        new Question() { Id = 2, Text = "Capital city of Spain?", CorrectAnswerId = 4, QuizId = 123 }
+                    },
+                    Answers = new List<Answer>()
+                    {
+                        new Answer(){Id = 1, QuestionId = 1, Text = "Manchester"},
+                        new Answer(){Id = 2, QuestionId = 1, Text = "London"},
+                        new Answer(){Id = 3, QuestionId = 1, Text = "Liverpool"},
+                        new Answer(){Id = 4, QuestionId = 2, Text = "Madrid"},
+                        new Answer(){Id = 5, QuestionId = 2, Text = "Barcelona"},
+                        new Answer(){Id = 6, QuestionId = 2, Text = "Sevilla"}
+                    }
+                }
+            });
+
+        var userAnswers = new List<Answer>()
+        {
+            new Answer(){ Id = 7, QuestionId = 1, Text = "Manchester"}, //FALSE
+            new Answer(){ Id = 8, QuestionId = 2, Text = "Madrid"}      //TRUE
+        };
+
+        var consumer = new QuizClient(_mockProviderServiceBaseUri, Client);
+
+        var result = await consumer.TakeAQuiz(123, userAnswers);
+
+        Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+        Assert.Equal(1, result.Value);
     }
 }
