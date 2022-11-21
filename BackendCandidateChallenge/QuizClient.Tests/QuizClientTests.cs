@@ -76,8 +76,8 @@ public class QuizClientTests : IClassFixture<QuizServiceApiPact>
     public async Task GetQuiz_WhenAQuizWExists_ReturnsTheQuiz()
     {
         _mockProviderService
-            .Given("There are some quizzes")
-            .UponReceiving("A GET request to retrieve the quiz")
+            .Given("There are some quizzes to fetch")
+            .UponReceiving("A GET request to retrieve the quizzes")
             .With(new ProviderServiceRequest
             {
                 Method = HttpVerb.Get,
