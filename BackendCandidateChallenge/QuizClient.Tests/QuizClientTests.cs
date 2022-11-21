@@ -28,6 +28,7 @@ public class QuizClientTests : IClassFixture<QuizServiceApiPact>
     [Fact]
     public async Task GetQuizzes_WhenSomeQuizzesExists_ReturnsTheQuizzes()
     {
+        //I would create generic private method for mocking services to avoid code duplication
         _mockProviderService
             .Given("There are some quizzes")
             .UponReceiving("A GET request to retrieve the quizzes")
@@ -75,6 +76,7 @@ public class QuizClientTests : IClassFixture<QuizServiceApiPact>
     [Fact]
     public async Task GetQuiz_WhenAQuizWExists_ReturnsTheQuiz()
     {
+        //I would create generic private method for mocking services to avoid code duplication
         _mockProviderService
             .Given("There are some quizzes to fetch")
             .UponReceiving("A GET request to retrieve the quizzes")
@@ -115,6 +117,7 @@ public class QuizClientTests : IClassFixture<QuizServiceApiPact>
     [Fact]
     public async Task PostQuiz_Returns201CreatedAndLocationHeader()
     {
+        //I would create generic private method for mocking services to avoid code duplication
         _mockProviderService
             .Given("There are some quizzes")
             .UponReceiving("A POST quiz request")
@@ -150,6 +153,7 @@ public class QuizClientTests : IClassFixture<QuizServiceApiPact>
     [Fact]
     public async Task PostQuestion_Returns201CreatedAndLocationHeader()
     {
+        //I would create generic private method for mocking services to avoid code duplication
         _mockProviderService
             .Given("There are some quizzes")
             .UponReceiving("A POST request to quiz 123 questions collection")
@@ -185,6 +189,7 @@ public class QuizClientTests : IClassFixture<QuizServiceApiPact>
     [Fact]
     public async Task PutQuestion_WhenAQuestionWExists_UpdatesTheQuestion()
     {
+        //I would create generic private method for mocking services to avoid code duplication
         _mockProviderService
             .Given("There are some quizzes")
             .UponReceiving("A PUT request to update a quiz question with id = 1")
@@ -219,6 +224,7 @@ public class QuizClientTests : IClassFixture<QuizServiceApiPact>
     [Fact]
     public async Task PostAnswers_Returns201CreatedAndLocationHeader()
     {
+        //I would create generic private method for mocking services to avoid code duplication
         _mockProviderService
             .Given("There are some quizzes")
             .UponReceiving("A POST request")
@@ -258,6 +264,7 @@ public class QuizClientTests : IClassFixture<QuizServiceApiPact>
     [Fact]
     public async Task GivenThatAQuizExistsPostingAnAnswerCreatesAQuizResponse()
     {
+        //I would create generic private method for mocking services to avoid code duplication
         _mockProviderService
             .Given("There is a quiz with id '123'")
             .UponReceiving("A POST request creates a quiz response")
@@ -293,6 +300,7 @@ public class QuizClientTests : IClassFixture<QuizServiceApiPact>
     [Fact]
     public async Task TakeAQuiz()
     {
+        //I would create generic private method for mocking services to avoid code duplication
         _mockProviderService
             .Given("Return quiz to play")
             .UponReceiving("A GET request to retrieve the quiz to play")
